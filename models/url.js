@@ -13,7 +13,7 @@ const UrlShcema = new Schema({
     shortUrl: {
         type: String,
         default: function() {
-            return `http://localhost:3000/${this._id}`
+            return `${process.env.BASE_URL}/${this._id}`
         }
     },
     clicks: {
