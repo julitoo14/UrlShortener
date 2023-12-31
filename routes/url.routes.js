@@ -7,5 +7,6 @@ router.get('/:id', urlController.getUrl);
 router.post('/api/shorten', urlController.postUrl);
 router.get('/api/urls', urlController.getUrls);
 router.get('/api/metrics/:id', urlController.getMetrics);
+router.delete('/api/delete/:id', urlController.deleteUrl);
 
 module.exports = router;

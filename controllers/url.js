@@ -41,9 +41,20 @@ const getUrls = async (req, res) => {
     res.json(urls);
 }
 
+const deleteUrl = async (req, res) => {
+    const { id } = req.params;
+    const url = await Url.findByIdAndDelete(id);
+    if (url) {
+        res.json(url);
+    } else {
+        res.status(404).json({ error: "URL no encontrada" });
+    }
+}
+
 module.exports = {
     getUrl,
     postUrl,
     getMetrics,
-    getUrls
+    getUrls,
+    deleteUrl
 }
