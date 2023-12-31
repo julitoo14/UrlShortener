@@ -36,8 +36,14 @@ const getMetrics = async (req, res) => {
     }
 }
 
+const getUrls = async (req, res) => {
+    const urls = await Url.find();
+    res.json(urls);
+}
+
 module.exports = {
     getUrl,
     postUrl,
-    getMetrics
+    getMetrics,
+    getUrls
 }
