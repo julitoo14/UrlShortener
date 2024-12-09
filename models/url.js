@@ -1,29 +1,34 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 const shortid = require('shortid');
 
-const UrlShcema = new Schema({
-    _id: {
-        type: String,
-        default: shortid.generate
+const UrlSchema = new Schema({
+  _id: {
+    type: String,
+    default: shortid.generate,
+  },
+  longUrl: {
+    type: String,
+    required: true,
+  },
+  customAlias: {
+    type: String,
+    unique: true, // Evita duplicados en alias personalizados
+    sparse: true, // Permite null o undefined
+  },
+  shortUrl: {
+    type: String,
+    default: function () {
+      return `${process.env.BASE_URL}/${this.customAlias || this._id}`;
     },
-    longUrl: {
-        type: String,
-        required: true
-    },
-    shortUrl: {
-        type: String,
-        default: function() {
-            return `${process.env.BASE_URL}/${this._id}`
-        }
-    },
-    clicks: {
-        type: Number,
-        default: 0
-    },
-    created_at: {
-        type: Date,
-        default: Date.now
-    }
+  },
+  clicks: {
+    type: Number,
+    default: 0,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-module.exports = model('Url', UrlShcema);
+module.exports = model('Url', UrlSchema);
